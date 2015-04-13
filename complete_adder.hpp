@@ -28,12 +28,17 @@ class complete_adder{
 		
 
 	public:
-
+		// The chance of error is : 	1 in X	if X>0
+		//								0 		if X=0 
+		// The stable_value_rate is how much more stable 0 and 3 are in QA
 		complete_adder(int nr_of_quartenary_adders, int nr_of_binary_adders
 			, int term_err_rate, int carry_err_rate, int stable_value_rate);
 		
+		//adds input 1 and 2 with simulated error added.
 		int add(int input1, int input2);
 
+		//prints the stats of the adder into a file named as the input string file,
+		// as well as in the terminal
 		void print_stats(std::string file);
 		
 };

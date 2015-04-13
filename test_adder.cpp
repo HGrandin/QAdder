@@ -4,9 +4,9 @@
 #define TERM_ERROR_RATE 	(1000000)
 #define CARRY_ERROR_RATE 	(10000000)
 #define STABLE_VALUE_RATE	(10)
-#define QUARTENARY_ADDERS 	(8)
+#define QUATERNARY_ADDERS 	(8)
 #define BINARY_ADDERS 		(16)
-#define FILE_NAME "newResults.csv"
+#define FILE_NAME "newResults2.csv"
 
 
 
@@ -14,7 +14,7 @@ int main(){
 	int i1,i2,i=0;
 	int adder_sum, real_sum;
 	int incorrect_sum_count = 0;
-	complete_adder *adder = new complete_adder(QUARTENARY_ADDERS,BINARY_ADDERS,
+	complete_adder *adder = new complete_adder(QUATERNARY_ADDERS,BINARY_ADDERS,
 		TERM_ERROR_RATE, CARRY_ERROR_RATE, STABLE_VALUE_RATE);
 	
 	std::default_random_engine generator(time(0));
