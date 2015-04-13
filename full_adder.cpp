@@ -7,11 +7,11 @@
 #include <random>
 
 
-full_adder::full_adder(int size, int term_err_rate, int carry_err_rate, int stbl_value_rate){
+full_adder::full_adder(int size, int term_err_rate, int carry_err_rate, int stbl_value_multiplier){
 	assert(size>1);
 	term_error_rate = term_err_rate;
 	carry_error_rate = carry_err_rate;
-	stable_value_rate = stbl_value_rate;
+	stable_value_multiplier = stbl_value_multiplier;
 	base = size;
 	generator.seed(time(0));
 }
@@ -73,14 +73,14 @@ adder_result full_adder::add(int input1, int input2, int carry_in){
 void full_adder::print_settings(){
 	printf("Term error rate: 1 in %d\n",term_error_rate);
 	printf("Carry error rate: 1 in %d\n",carry_error_rate);
-	printf("Stable value rate: %d\n",stable_value_rate);
+	printf("Stable value rate: %d\n",stable_value_multiplier);
 	printf("Base: %d\n", base);
 }
 
 
 int full_adder::add_input_noise(int input){
 	std::uniform_int_distribution<int> term_distribution(1, term_error_rate);
-	std::uniform_int_distribution<int> stable_distribution(1, stable_value_rate);
+	std::uniform_int_distribution<int> stable_distribution(1, stable_value_multiplier);
 	std::uniform_int_distribution<int> fifty_fifty(1, 2);
 	if(term_distribution(generator) == 1){
 		switch(input){

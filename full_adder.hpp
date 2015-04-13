@@ -22,7 +22,7 @@ class full_adder{
 		int carry_error_rate;
 
 		//How much more stable the 0 and 3 are in a Quartenary Adder
-		int stable_value_rate;
+		int stable_value_multiplier;
 
 		// a quartenary specific function that adds noise to the input
 		int add_input_noise(int input);
@@ -31,8 +31,8 @@ class full_adder{
 		// where size is the number of values the input can have,
 		// The chance of error is : 	1 in X	if X>0
 		//								0 		if X=0 
-		// The stable_value_rate is how much more stable 0 and 3 are in QA
-		full_adder(int size, int term_err_rate, int carry_err_rate, int stable_value_rate);
+		// The stable_value_multiplier is how much more stable 0 and 3 are in QA
+		full_adder(int size, int term_err_rate, int carry_err_rate, int stable_value_multiplier);
 
 		void print_settings();
 

@@ -11,7 +11,7 @@ class complete_adder{
 		int quaternary_size;
 		int term_error_rate;
 		int carry_error_rate;
-		int stable_value_rate;
+		int stable_value_multiplier;
 		full_adder *quaternary_adder;
 		full_adder *binary_adder;
 
@@ -31,9 +31,9 @@ class complete_adder{
 	public:
 		// The chance of error is : 	1 in X	if X>0
 		//								0 		if X=0 
-		// The stable_value_rate is how much more stable 0 and 3 are in QA
+		// The stable_value_multiplier is how much more stable 0 and 3 are in QA
 		complete_adder(int nr_of_quaternary_adders, int nr_of_binary_adders
-			, int term_err_rate, int carry_err_rate, int stable_value_rate);
+			, int term_err_rate, int carry_err_rate, int stable_value_multiplier);
 		
 		//adds input 1 and 2 with simulated error added.
 		int add(int input1, int input2);

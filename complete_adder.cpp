@@ -6,14 +6,14 @@
 #include <fstream>
 
 
-complete_adder::complete_adder(int nr_of_quaternary_adders, int nr_of_binary_adders, int term_err_rate, int carry_err_rate, int stbl_value_rate){
+complete_adder::complete_adder(int nr_of_quaternary_adders, int nr_of_binary_adders, int term_err_rate, int carry_err_rate, int stbl_value_multiplier){
 	number_of_quaternary_adders = nr_of_quaternary_adders;
 	number_of_binary_adders = nr_of_binary_adders;
 	term_error_rate = term_err_rate;
 	carry_error_rate = carry_err_rate;
-	stable_value_rate = stbl_value_rate;
+	stable_value_multiplier = stbl_value_multiplier;
 
-	quaternary_adder = new full_adder(4,term_error_rate, carry_error_rate, stable_value_rate);
+	quaternary_adder = new full_adder(4,term_error_rate, carry_error_rate, stable_value_multiplier);
 	binary_adder = new full_adder(2,0,0,1);
 	quaternary_size = pow(4,number_of_quaternary_adders);
 	error_array = new long long int[32];
@@ -131,7 +131,7 @@ void complete_adder::print_stats(std::string file){
 	myfile << "Error >= 2^31\n";
 	
 	myfile << number_of_quaternary_adders << ", " << number_of_binary_adders << ", ";
-	myfile << term_error_rate << " ," << carry_error_rate << ", " << stable_value_rate << ", " << nr_of_adds << ", ";
+	myfile << term_error_rate << " ," << carry_error_rate << ", " << stable_value_multiplier << ", " << nr_of_adds << ", ";
 	myfile << incorrect_adds << " ," << quaternary_errors << ", " << binary_errors;
 	for(int i = 0; i < 32; i++){
 		myfile << ", " << error_array[i];
@@ -147,7 +147,7 @@ void complete_adder::print_stats(std::string file){
 	printf("Number of binary adders (MSB): %d\n", number_of_binary_adders);
 	printf("Term error rate: 1 in %d \n", term_error_rate);
 	printf("Carry error rate: 1 in %d \n", carry_error_rate);
-	printf("Stable value rate: %d \n", stable_value_rate);
+	printf("Stable value rate: %d \n", stable_value_multiplier);
 	printf("Total number of adds %lld \n", nr_of_adds);
 	printf("Number of incorrect adds %lld \n", incorrect_adds);
 	printf("Errors on the quaternary side: %lld\n", quaternary_errors);
