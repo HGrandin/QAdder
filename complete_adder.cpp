@@ -6,15 +6,15 @@
 #include <fstream>
 
 
-complete_adder::complete_adder(int nr_of_quartenary_adders, int nr_of_binary_adders, int term_err_rate, int carry_err_rate, int sum_err_rate){
+complete_adder::complete_adder(int nr_of_quartenary_adders, int nr_of_binary_adders, int term_err_rate, int carry_err_rate, int stbl_value_rate){
 	number_of_quartenary_adders = nr_of_quartenary_adders;
 	number_of_binary_adders = nr_of_binary_adders;
 	term_error_rate = term_err_rate;
 	carry_error_rate = carry_err_rate;
-	sum_error_rate = sum_err_rate;
+	stable_value_rate = stbl_value_rate;
 
-	quartenary_adder = new full_adder(4,term_error_rate, carry_error_rate, sum_error_rate);
-	binary_adder = new full_adder(2,0,0,0);
+	quartenary_adder = new full_adder(4,term_error_rate, carry_error_rate, stable_value_rate);
+	binary_adder = new full_adder(2,0,0,1);
 	quartenary_size = pow(4,number_of_quartenary_adders);
 	error_array = new long long int(32);
 	for(int i=0; i<32;i++){
@@ -106,14 +106,14 @@ void complete_adder::print_stats(std::string file){
 
 	std::ofstream myfile;
 	myfile.open (file);
-	myfile << "Nr of QA, Nr of BA, Term error rate, Carry error rate, Sum error rate, Nr of adds, Nr of Incorrect adds, ";
+	myfile << "Nr of QA, Nr of BA, Term error rate, Carry error rate, Stable value rate, Nr of adds, Nr of Incorrect adds, ";
 	myfile << "Quartenary side errors, Binary side errors, ";
 	myfile << "Bit0, Bit1, Bit2, Bit3, Bit4, Bit5, Bit6, Bit7, Bit8, Bit9, Bit10, Bit11,";
 	myfile << "Bit12, Bit13, Bit14, Bit15, Bit16, Bit17, Bit18, Bit19, Bit20, Bit21, Bit22,";
 	myfile << "Bit23, Bit24, Bit25, Bit26, Bit27, Bit28, Bit29, Bit30, Bit31\n";
 	
 	myfile << number_of_quartenary_adders << ", " << number_of_binary_adders << ", ";
-	myfile << term_error_rate << " ," << carry_error_rate << ", " << sum_error_rate << ", " << nr_of_adds << ", ";
+	myfile << term_error_rate << " ," << carry_error_rate << ", " << stable_value_rate << ", " << nr_of_adds << ", ";
 	myfile << incorrect_adds << " ," << quartenary_errors << ", " << binary_errors;
 	for(int i = 0; i < 32; i++){
 		myfile << ", " << error_array[i];
@@ -125,7 +125,7 @@ void complete_adder::print_stats(std::string file){
 	printf("Number of binary adders (MSB): %d\n", number_of_binary_adders);
 	printf("Term error rate: 1 in %d \n", term_error_rate);
 	printf("Carry error rate: 1 in %d \n", carry_error_rate);
-	printf("Sum error rate: 1 in %d \n", sum_error_rate);
+	printf("Stable value rate: %d \n", stable_value_rate);
 	printf("Total number of adds %lld \n", nr_of_adds);
 	printf("Number of incorrect adds %lld \n", incorrect_adds);
 	printf("Errors on the quartenary side: %lld\n", quartenary_errors);

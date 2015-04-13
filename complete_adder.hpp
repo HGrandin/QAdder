@@ -11,7 +11,7 @@ class complete_adder{
 		int quartenary_size;
 		int term_error_rate;
 		int carry_error_rate;
-		int sum_error_rate;
+		int stable_value_rate;
 		full_adder *quartenary_adder;
 		full_adder *binary_adder;
 
@@ -30,7 +30,7 @@ class complete_adder{
 	public:
 
 		complete_adder(int nr_of_quartenary_adders, int nr_of_binary_adders
-			, int term_err_rate, int carry_err_rate, int result_error_rate);
+			, int term_err_rate, int carry_err_rate, int stable_value_rate);
 		
 		int add(int input1, int input2);
 

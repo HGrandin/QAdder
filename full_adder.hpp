@@ -11,7 +11,7 @@ struct adder_result{
 class full_adder{
 	private:
 		std::default_random_engine generator;
-		
+
 		// decides if the adder is of base 2 or base 4
 		int base;
 
@@ -21,16 +21,18 @@ class full_adder{
 		//The error rate of the carry input in the adder
 		int carry_error_rate;
 
-		//The error rate of the calculated sum (in addtion to the other sources)
-		int sum_error_rate;
+		//How much more stable the 0 and 3 are in a Quartenary Adder
+		int stable_value_rate;
 
-		double add_noise(int input);
+		// a quartenary specific function that adds noise to the input
+		int add_input_noise(int input);
 
 	public:
 		// where size is the number of values the input can have,
 		// The chance of error is : 	1 in X	if X>0
 		//								0 		if X=0 
-		full_adder(int size, int term_err_rate, int carry_err_rate, int result_error_rate);
+		// The stable_value_rate is how much more stable 0 and 3 are in QA
+		full_adder(int size, int term_err_rate, int carry_err_rate, int stable_value_rate);
 
 		void print_settings();
 
